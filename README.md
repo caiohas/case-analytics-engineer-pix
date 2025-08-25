@@ -43,7 +43,7 @@ Esses arquivos foram ingeridos uilizando **Python** (pasta code do projeto) e ve
 
 ## ⚙️ Orquestração e Processamento  
 - **Apache Airflow** para orquestração dos pipelines a serem executados.  
-- **dbt** para modelagem SQL no data warehouse (Bronze → Silver → Gold).  
+- **dbt** para modelagem SQL no data warehouse (Bronze → Silver → Gold) e atualização incremental dos dados.  
 
 
 ## ✅ Data Quality & Observabilidade  
