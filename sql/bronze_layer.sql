@@ -1,6 +1,4 @@
 -- bronze.core_account
-drop table if exists bronze.core_account;
-
 create table bronze.core_account as
 select
     id_transaction::varchar as id_transaction,                           
@@ -13,8 +11,6 @@ select
 from raw.core_account;
 
 -- bronze.core_pix
-drop table if exists bronze.core_pix;
-
 create table bronze.core_pix as
 select
     id_transaction::varchar as id_transaction,
@@ -26,8 +22,6 @@ select
 from raw.core_pix;
 
 -- bronze.customer
-drop table if exists bronze.customer;
-
 create table bronze.customer as
 select
     surrogate_key::integer as cd_account_customer,
