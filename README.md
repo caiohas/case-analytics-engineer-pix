@@ -19,22 +19,26 @@ Esses arquivos foram ingeridos uilizando **Python** (pasta code do projeto) e ve
 ### 🔴 Raw Layer  
 - Ingestão dos arquivos **CSV** em um **Data Lake**.
 - No desenho, a título de exemplo, utilizei o **AWS S3**. Para realizar a ingestão e consultas utilizei o **PostgreSQL** rodando no **Docker**.  
-- Ingestão dos arquivos sem transformação.  
+- Ingestão dos arquivos sem transformação.
+- Códigos utilizados estão presentes na pasta **'code'**.  
 
 ### 🥉 Bronze Layer  
 - Criação das tabelas da camada **bronze**: `core_account`, `core_pix` e `customer`.  
 - Os dados foram **copiados da camada raw** e sofreram algumas transformações como **conversão de tipos** e **renomeação de colunas**:  
 - O objetivo era criar a camada bronze com dados brutos padronizados, prontos para transformações posteriores.
+- Código utilizado presente no arquivo **'bronze_layer.sql'**.
 
 ### 🥈 Silver Layer  
 - Criação das tabelas `core_account`, `core_pix` e `customer` com chaves primárias.  
 - Deduplicação dos registros.  
-- Consolidação dos dados da Bronze garantindo unicidade por chave de negócio.  
+- Consolidação dos dados da Bronze garantindo unicidade por chave de negócio.
+- Código utilizado presente no arquivo **'silver_layer.sql'**.  
 
 ### 🥇 Gold Layer  
 - Construção de **métricas e cubos analíticos**.  
 - Exemplo: volume transacionado via PIX por cliente, número de aberturas de novas contas no mês etc.  
-- Dados prontos para **BI (Power BI)**, **Data Science (Python)** e **Machine Learning/AI**.  
+- Dados prontos para **BI (Power BI)**, **Data Science (Python)** e **Machine Learning/AI**.
+- Código utilizado presente no arquivo **'gold_layer.sql'**.  
 
 
 ## ⚙️ Orquestração e Processamento  
@@ -69,6 +73,8 @@ Com os dados disponibilizados, optei por fazer 4 tipos de análises que servirã
 - **Transações não registradas no serviço core pix** que estão presentes no serviço core account (core_pix.id_transaction is null).
 - **Transações com valores divergentes** entre os serviços core account e core pix visto que os valores transacionados devem ser o mesmo dentro das duas etapas.
 - **Transações com datas de transação divergentes** entre os serviços core account e core pix visto que o serviço deve ser instantâneo.
+
+As consultas utilizadas estão no arquivo **'inconsistencia_pix.sql'**.
 
 # 🚀 Desafio #3 - API Pesquisa de Satisfação com Parceiro
 A partir do cenário apresentado, a solução pensada pode ser observada no esquema exemplificado abaixo:
