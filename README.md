@@ -9,7 +9,7 @@ A solução considera um cenário real de rotina em uma **Fintech**, onde grande
 - **customer** (CSV)  
 
 ## ⚙️ Desenvolvimento da Atividade
-Esses arquivos foram ingeridos uilizando **Python** (pasta code do projeto) e versionados via **GitHub**. Após a ingestão, eles foram escritos em uma instância do **PostgreSQL** rodando no **Docker**. A partir da camada **raw** realizei as transformações via **queries SQL** para as camadas **bronze**, **silver** e **gold** (pasta sql do projeto).
+Esses arquivos foram ingeridos uilizando **Python** (pasta code do projeto) e versionados via **GitHub**. Após a ingestão, eles foram escritos em uma instância do **PostgreSQL** rodando no **Docker** ('docker-compose up' para inciar e 'docker-compose down' para desligar a instância). A partir da camada **raw** realizei as transformações via **queries SQL** para as camadas **bronze**, **silver** e **gold** (pasta sql do projeto).
 
 ## 🏗️ Arquitetura da Solução  
 ![alt text](image.png)
