@@ -1,46 +1,43 @@
-WITH transacoes_nao_registradas_pix AS (
-    SELECT
+with transacoes_nao_registradas_pix as (
+    select
         ca.id_transaction,
-        'transacao nao registrada CORE PIX' AS inconsistencia
-    FROM silver.core_account ca
-    LEFT JOIN silver.core_pix cp 
-        ON ca.id_transaction = cp.id_transaction 
-    WHERE cp.id_transaction IS NULL
-    LIMIT 100
+        'transacao nao registrada core pix' as inconsistencia
+    from silver.core_account ca
+    left join silver.core_pix cp 
+        on ca.id_transaction = cp.id_transaction 
+    where cp.id_transaction is null
 ),
-transacoes_nao_registradas_account AS (
-    SELECT
+transacoes_nao_registradas_account as (
+    select
         cp.id_transaction,
-        'transacao nao registrada CORE ACCOUNT' AS inconsistencia
-    FROM silver.core_pix cp 
-    LEFT JOIN silver.core_account ca
-        ON ca.id_transaction = cp.id_transaction 
-    WHERE ca.id_transaction IS NULL
+        'transacao nao registrada core account' as inconsistencia
+    from silver.core_pix cp 
+    left join silver.core_account ca
+        on ca.id_transaction = cp.id_transaction 
+    where ca.id_transaction is null
 ),
-valores_divergentes AS (
-    SELECT
+valores_divergentes as (
+    select
         ca.id_transaction,
-        'valores divergentes CORE ACCOUNT e CORE PIX' AS inconsistencia
-    FROM silver.core_account ca
-    LEFT JOIN silver.core_pix cp 
-        ON ca.id_transaction = cp.id_transaction 
-    WHERE ca.vl_transaction != cp.vl_transaction 
-    LIMIT 100
+        'valores divergentes core account e core pix' as inconsistencia
+    from silver.core_account ca
+    left join silver.core_pix cp 
+        on ca.id_transaction = cp.id_transaction 
+    where ca.vl_transaction != cp.vl_transaction 
 ),
-datas_divergentes AS (
-    SELECT
+datas_divergentes as (
+    select
         ca.id_transaction,
-        'datas divergentes CORE ACCOUNT e CORE PIX' AS inconsistencia
-    FROM silver.core_account ca
-    LEFT JOIN silver.core_pix cp 
-        ON ca.id_transaction = cp.id_transaction 
-    WHERE ca.dt_transaction != cp.dt_transaction 
-    LIMIT 100
+        'datas divergentes core account e core pix' as inconsistencia
+    from silver.core_account ca
+    left join silver.core_pix cp 
+        on ca.id_transaction = cp.id_transaction 
+    where ca.dt_transaction != cp.dt_transaction 
 )
-SELECT * FROM transacoes_nao_registradas_pix
-UNION all
-SELECT * FROM transacoes_nao_registradas_account
-UNION ALL
-SELECT * FROM valores_divergentes
-UNION ALL
-SELECT * FROM datas_divergentes;
+select * from transacoes_nao_registradas_pix
+union all
+select * from transacoes_nao_registradas_account
+union all
+select * from valores_divergentes
+union all
+select * from datas_divergentes;
